@@ -74,21 +74,33 @@ public class UserController {
         return ResponseEntity.status(404).body("User not found");
     }
 
-    // Feature: Edit Password
+    // Feature: Edit Password (UPDATED to verify Old Password)
     @PutMapping("/users/{id}/password")
     public ResponseEntity<?> changePassword(@PathVariable Long id, @RequestBody Map<String, String> passwords) {
         Optional<User> userOptional = userRepository.findById(id);
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            user.setPasswordHash(passwords.get("newPassword"));
+
+            // Extract both passwords from the React request
+            String oldPassword = passwords.get("oldPassword");
+            String newPassword = passwords.get("newPassword");
+
+            // Security Check: Does the provided old password match the database?
+            if (!user.getPasswordHash().equals(oldPassword)) {
+                // If it doesn't match, send back a 400 error before anything is saved
+                return ResponseEntity.status(400).body(Map.of("message", "Incorrect old password."));
+            }
+
+            // If it matches, it is safe to overwrite it with the new one
+            user.setPasswordHash(newPassword);
             userRepository.save(user);
             return ResponseEntity.ok(Map.of("message", "Password changed successfully"));
         }
-        return ResponseEntity.status(404).body("User not found");
+        return ResponseEntity.status(404).body(Map.of("message", "User not found"));
     }
 
-    // Feature: Upload Photo (New Requirement)
+    // Feature: Upload Photo
     @PostMapping("/users/{id}/photo")
     public ResponseEntity<?> uploadPhoto(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
         try {
