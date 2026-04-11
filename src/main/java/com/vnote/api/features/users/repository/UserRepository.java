@@ -1,6 +1,6 @@
-package com.vnote.api.repository;
+package com.vnote.api.features.users.repository;
 
-import com.vnote.api.model.User;
+import com.vnote.api.features.users.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 

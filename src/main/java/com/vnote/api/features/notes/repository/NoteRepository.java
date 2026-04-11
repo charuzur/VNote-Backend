@@ -1,6 +1,6 @@
-package com.vnote.api.repository;
+package com.vnote.api.features.notes.repository;
 
-import com.vnote.api.model.Note;
+import com.vnote.api.features.notes.model.Note;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 

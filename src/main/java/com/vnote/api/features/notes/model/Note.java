@@ -1,4 +1,4 @@
-package com.vnote.api.model;
+package com.vnote.api.features.notes.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
