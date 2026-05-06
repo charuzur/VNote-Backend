@@ -1,7 +1,7 @@
-package com.vnote.api.controller;
+package com.vnote.api.features.users.controller;
 
-import com.vnote.api.model.User;
-import com.vnote.api.repository.UserRepository;
+import com.vnote.api.features.users.model.User;
+import com.vnote.api.features.users.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
